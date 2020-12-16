@@ -2,13 +2,9 @@
 
 > Simple Backend API for simple e-commerce site
 
----
-
 ## Usage
 
 Before you start make sure you have been installed [MySQL](https://dev.mysql.com/downloads/installer/) on your machine. See the [installation](https://dev.mysql.com/doc/mysql-installation-excerpt/8.0/en/) guide here.
-
----
 
 ### Create new database
 
@@ -69,21 +65,15 @@ CREATE TABLE IF NOT EXISTS transactions(
 );
 ```
 
----
-
 ### Edit Environment Configuration
 
 Rename `"example.env"` to `".env"`, open it and edit the value to your own.
-
----
 
 ### Install Dependencies
 
 ```bash
 npm install
 ```
-
----
 
 ### Notes
 
