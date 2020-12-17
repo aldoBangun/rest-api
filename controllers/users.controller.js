@@ -67,13 +67,14 @@ module.exports = {
    },
    deleteUsers: (req, res) => {
       deleteUsers((err, results) => {
+         console.log(results);
          if (err) {
             res.status(500).json({
                success: 0,
                message: err.message,
             });
          } else {
-            req.status(200).json({
+            res.status(200).json({
                success: 0,
                message: "Successfully delete all users",
             });
@@ -83,9 +84,10 @@ module.exports = {
    deleteUser: (req, res) => {
       const { id } = req.params;
       deleteUser(id, (err, results) => {
+         console.log(results);
          if (err) {
-            if (err.status) {
-               res.status(err.status).json({
+            if (err.status === 400) {
+               res.status(400).json({
                   success: 0,
                   message: `Cannot proccess request to an id of${id}`,
                });
@@ -95,17 +97,21 @@ module.exports = {
                   message: err.message,
                });
             }
+         } else {
+            res.status(200).json({
+               success: 1,
+               message: `Successfully deleted a user with an id of ${id}`,
+            });
          }
       });
    },
    updateUser: (req, res) => {
-      req.body.id = req.params.id;
       const salt = genSaltSync(10);
       req.body.password = hashSync(req.body.password, salt);
-      updateUser(req.body, (err, results) => {
+      updateUser({ id: req.params.id, ...req.body }, (err, results) => {
          if (err) {
-            if (err.status) {
-               res.status(err.status).json({
+            if (err.status === 400) {
+               res.status(400).json({
                   success: 0,
                   message: `Cannot proccess request to an id of ${req.params.id}`,
                });
