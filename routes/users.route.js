@@ -11,6 +11,6 @@ const {
 
 router.route("/").get(getUsers).post(addUser).delete(deleteUsers);
 
-router.route("/:id").get(getUser).delete(deleteUser).post(updateUser);
+router.route("/:id").get(getUser).delete(deleteUser).patch(updateUser);
 
 module.exports = router;
