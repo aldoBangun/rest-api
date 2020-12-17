@@ -40,8 +40,9 @@ module.exports = {
          [firstName, lastName, email, password, gender, id],
          (err, results) => {
             if (err) return callback(err);
-            // if (results.affectedRows < 1) return callback({ status: 400 });
-            return callback(null, results);
+            console.log(results);
+            if (results.affectedRows < 1) return callback({ status: 400 });
+            callback(null, newData);
          }
       );
    },
